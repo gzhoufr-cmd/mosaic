@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+	<changeSet id="202511272026-1" author="user">
+		<createTable tableName="cut" ifNotExists="true">
+			<column name="id" type="bigint" autoIncrement="${autoIncrement}">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="algorithm" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="total_surface" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="202511272026-2" author="user">
+		<createTable tableName="piece" ifNotExists="true">
+			<column name="id" type="bigint" autoIncrement="${autoIncrement}">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="cut_id" type="bigint">
+				<constraints nullable="false" foreignKeyName="fk_cut_piece" references="cut(id)" />
+			</column>
+			<column name="sx" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="sy" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="ex" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="ey" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="surface" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="202511272026-3" author="user">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<sequenceExists sequenceName="cut_seq" />
+				<sequenceExists sequenceName="piece_seq" />
+			</not>
+		</preConditions>
+		<createSequence dataType="bigint" incrementBy="50" sequenceName="cut_seq" />
+		<createSequence dataType="bigint" incrementBy="50" sequenceName="piece_seq" />
+	</changeSet>
+
+
+</databaseChangeLog>

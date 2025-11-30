@@ -9,7 +9,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mosaic</groupId>
-	<artifactId>mosai</artifactId>
+	<artifactId>mosaic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-boot-mosaic-cut</name>
 	<description>Mosaic cut project for Spring Boot</description>
